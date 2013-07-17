@@ -4,11 +4,11 @@ platform: linux.ros.turtlebot
 launch: turtlebot_core_apps/android_teleop.launch
 interface: turtlebot_core_apps/android_teleop.interface
 icon: turtlebot_core_apps/android_teleop_bubble_icon.png
-clients:
+pairing_clients:
  - type: android
    manager:
      api-level: 9
-     intent-action: org.ros.android.teleop.MainActivity
+     intent-action: org.ros.android.teleop.MainActivity 
    app: 
      gravityMode: 0
-     base_control_topic: /cmd_vel
+     base_control_topic: /mobile_base/commands/velocity

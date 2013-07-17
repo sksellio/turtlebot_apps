@@ -6,10 +6,10 @@ project(turtlebot_teleop)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS cmd_vel_mux geometry_msgs joy kobuki_safety_controller roscpp yocs_velocity_smoother)
 
-# catkin_python_setup()
+catkin_python_setup()
 
 catkin_package(
-  INCLUDE_DIRS include
+  #INCLUDE_DIRS include
   LIBRARIES turtlebot_teleop
   CATKIN_DEPENDS cmd_vel_mux geometry_msgs joy kobuki_safety_controller roscpp yocs_velocity_smoother
   DEPENDS system_lib

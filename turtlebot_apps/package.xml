@@ -16,17 +16,17 @@
   <url type="bugtracker">https://github.com/turtlebot/turtlebot_apps/issues</url>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <!--
+  
   <run_depend>pano</run_depend>
-  <run_depend>turtlebot_actions</run_depend>
-  <run_depend>turtlebot_calibration</run_depend>
+  <run_depend>turtlebot_actions</run_depend> 
+  <run_depend>turtlebot_calibration</run_depend> 
   <run_depend>turtlebot_core_apps</run_depend>
   <run_depend>turtlebot_follower</run_depend>
   <run_depend>turtlebot_navigation</run_depend>
-  <run_depend>turtlebot_panorama</run_depend>
+  <run_depend>turtlebot_panorama</run_depend> 
   <run_depend>turtlebot_sounds</run_depend>
   <run_depend>turtlebot_teleop</run_depend>
--->
+
   <export>
     <metapackage/> 
   </export>

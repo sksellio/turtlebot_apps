@@ -1,0 +1,11 @@
+apps:
+ - turtlebot_core_apps/chirp
+ - turtlebot_core_apps/android_teleop
+ - turtlebot_core_apps/follower
+ - turtlebot_core_apps/baxter_joint_teleop
+# - rocon_apps/talker
+# - rocon_apps/listener
+ 
+# Currently not updated.
+# - rocon_apps/turtlesim_control
+# - rocon_apps/turtlesim_viz

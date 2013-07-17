@@ -13,8 +13,8 @@
 #include <list>
 #include <iterator>
 #include <boost/foreach.hpp>
-#include <pano_core/pano_core.h>
 #include <pano_py/opencv.h>
+#include <pano_core/pano_core.h>
 #include <opencv2/highgui/highgui.hpp>
 
 #include "wrappers.h"

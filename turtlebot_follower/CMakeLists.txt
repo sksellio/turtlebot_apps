@@ -4,7 +4,7 @@ project(turtlebot_follower)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS nodelet pcl_ros roscpp visualization_msgs message_generation dynamic_reconfigure)
+find_package(catkin REQUIRED COMPONENTS nodelet pcl_ros roscpp visualization_msgs message_generation dynamic_reconfigure yocs_velocity_smoother)
 find_package(Boost REQUIRED)
 find_package(PCL)
 
@@ -21,8 +21,10 @@ generate_messages()
 generate_dynamic_reconfigure_options(cfg/Follower.cfg)
 include_directories(include cfg/cpp)
 
+#add_custom_target(${PROJECT_NAME} DEPENDS ${PROJECT_NAME}_gencpp)
+
 catkin_package(
-  INCLUDE_DIRS include
+  #INCLUDE_DIRS include
   LIBRARIES turtlebot_follower
   CATKIN_DEPENDS nodelet pcl_ros roscpp visualization_msgs message_runtime
   DEPENDS system_lib PCL
@@ -44,6 +46,7 @@ include_directories(include SYSTEM
   ${Boost_INCLUDE_DIRS}
 )
 
+include_directories(${catkin_INCLUDE_DIRS} include)
 ## Declare a cpp library
 add_library(turtlebot_follower src/follower.cpp)
 
@@ -52,6 +55,7 @@ add_library(turtlebot_follower src/follower.cpp)
 
 add_dependencies(turtlebot_follower turtlebot_follower_generate_messages_cpp)
 
+add_dependencies(${PROJECT_NAME} ${turtlebot_follower_EXPORTED_TARGETS})
 ## Specify libraries to link a library or executable target against
 target_link_libraries(turtlebot_follower
   ${catkin_LIBRARIES}

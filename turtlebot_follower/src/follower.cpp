@@ -56,7 +56,22 @@ public:
   /*!
    * @brief The constructor for the follower.
    * Constructor for the follower.
-   */
+EMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+#include "ros/ros.h"
+#include "pluginlib/class_list_macros.h"
+#include "nodelet/nodelet.h"
+#include <geometry_msgs/Twist.h>
+#include <pcl_ros/point_cloud.h>
+#include <pcl/point_types.h>
+#include "dynamic_reconfigure/server.h"
+
   TurtlebotFollower() : min_y_(0.1), max_y_(0.5),
                         min_x_(-0.2), max_x_(0.2),
                         max_z_(0.8), goal_z_(0.6),
@@ -141,6 +156,8 @@ private:
    */
   void cloudcb(const PointCloud::ConstPtr&  cloud)
   {
+    ROS_INFO("Cloud callback.");
+
     //X,Y,Z of the centroid
     float x = 0.0;
     float y = 0.0;
@@ -173,7 +190,7 @@ private:
       x /= n;
       y /= n;
       if(z > max_z_){
-        ROS_DEBUG("No valid points detected, stopping the robot");
+        ROS_INFO("No valid points detected, stopping the robot");
         if (enabled_)
         {
           cmdpub_.publish(geometry_msgs::TwistPtr(new geometry_msgs::Twist()));
@@ -181,20 +198,26 @@ private:
         return;
       }
 
-      ROS_DEBUG("Centroid at %f %f %f with %d points", x, y, z, n);
+      ROS_INFO("Centroid at %f %f %f with %d points", x, y, z, n);
       publishMarker(x, y, z);
 
       if (enabled_)
       {
+        ROS_INFO("Sending Twist");
         geometry_msgs::TwistPtr cmd(new geometry_msgs::Twist());
         cmd->linear.x = (z - goal_z_) * z_scale_;
         cmd->angular.z = -x * x_scale_;
         cmdpub_.publish(cmd);
       }
+      else
+      {
+        ROS_INFO("Not enabled");
+      }
+     
     }
     else
     {
-      ROS_DEBUG("No points detected, stopping the robot");
+      ROS_INFO("No points detected, stopping the robot");
       publishMarker(x, y, z);
 
       if (enabled_)
